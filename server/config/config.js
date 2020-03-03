@@ -8,9 +8,9 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 let urlDB;
 
 if (process.env.NODE_ENV === 'dev') {
-    urlDB = 'mongodb://localhost:27017/cafeteria';
+    urlDB = 'mongodb+srv://admin:admin@cluster0-aokp5.mongodb.net/integradora';
 } else {
-    urlDB = 'mongodb+srv://admin:admin@cluster0-aokp5.mongodb.net/library'
+    urlDB = 'mongodb://localhost:27017/integradora'
 
 }
 
