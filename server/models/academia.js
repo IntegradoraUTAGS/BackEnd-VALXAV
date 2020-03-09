@@ -6,6 +6,10 @@ let academiaSchema = new Schema({
     nombre: {
         type: String,
         required: [true, 'Ingrese el nombre de la academia por favor']
+    },
+    estado: {
+        type: Boolean,
+        default: true
     }
 });
 
