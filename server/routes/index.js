@@ -8,4 +8,5 @@ app.use(require('./academia'));
 app.use(require('./periodo'));
 app.use(require('./carrera'));
 app.use(require('./especialidad'));
+app.use(require('./grupo'));
 module.exports = app;
