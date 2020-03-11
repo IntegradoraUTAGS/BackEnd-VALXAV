@@ -1,3 +1,4 @@
+/* jshint esversion: 8 */
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 const Especialidad = require('../models/especialidad');
@@ -29,6 +30,8 @@ let grupoSchema = new Schema({
     }
 
 });
+
+
 //el esquema utilize el plugin
 grupoSchema.plugin(uniqueValidator, {
     message: '{PATH} Debe ser único y diferente'

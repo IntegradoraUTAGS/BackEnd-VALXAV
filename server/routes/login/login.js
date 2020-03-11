@@ -1,10 +1,11 @@
+/* jshint esversion: 8 */
 const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Usuario = require('../models/usuario');
 const app = express();
 
-app.post('/login', (req, res) => {
+app.post('/api/login/', (req, res) => {
     let body = req.body;
 
     Usuario.findOne({ email: body.email }, (err, usrDB) => {

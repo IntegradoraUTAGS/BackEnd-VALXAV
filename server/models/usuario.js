@@ -1,6 +1,7 @@
+/* jshint esversion: 8 */
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
-
+const mongooseHidden = require('mongoose-hidden')()
 //declarar esquema
 let Schema = mongoose.Schema;
 
@@ -32,6 +33,8 @@ let usuarioSchema = new Schema({
         default: true
     }
 });
+
+grupoSchema.plugin(mongooseHidden,({ hidden: { password: true } }))
 //el esquema utilize el plugin
 usuarioSchema.plugin(uniqueValidator, {
     message: '{PATH} Debe ser único y diferente'

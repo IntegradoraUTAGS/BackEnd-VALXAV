@@ -1,3 +1,4 @@
+ /* jshint esversion: 8 */
 const mongoose = require('mongoose');
 const uniquevalidator = require('mongoose-unique-validator');
 

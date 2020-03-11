@@ -1,11 +1,12 @@
+/* jshint esversion: 8 */
 const express = require('express');
 const bcrypt = require('bcrypt');
 const _ = require('underscore');
-const { verificaToken } = require('../middlewares/autenticacion');
-const Usuario = require('../models/usuario'); //subir nivel
+const { verificaToken } = require('../../middlewares/autenticacion');
+const Usuario = require('../../models/usuario'); //subir nivel
 const app = express();
 
-app.get('/usuario/', [verificaToken], (req, res) => {
+app.get('/api/usuario/obtener', [verificaToken], (req, res) => {
     // let desde = req.params.desde || 0;
     // desde = Number(desde); //forzar que el dato siempre sea numerico
     // let limite = req.params.limite || 0;
@@ -39,25 +40,29 @@ app.get('/usuario/', [verificaToken], (req, res) => {
 //         nombre
 //     });
 // });
-app.get('/usuario/:id', [verificaToken], (req, res) => {
+app.get('/api/usuario/obtener/:id', [verificaToken], (req, res) => {
     let id = req.params.id;
     Usuario.find({ estado: true, _id: id }) //select * from usuario where estado=true
         .exec((err, usuarios) => { //ejecuta la funcion
             if (err) {
                 return res.status(400).json({
                     ok: false,
+                    status:400,
+                    msg:'Error al obtener el usuario',
                     err
                 });
             }
             console.log(req.usuario);
             return res.status(200).json({
                 ok: true,
+                status:200,
+                msg:'Se obtuvieron los usuarios correctamente',
                 count: usuarios.length,
                 usuarios
             });
         });
 });
-app.post('/usuario/registrar', (req, res) => {
+app.post('/api/usuario/registrar', (req, res) => {
     let body = req.body;
     let usuario = new Usuario({
         //para poder mandar los datos a la coleccion
@@ -72,18 +77,21 @@ app.post('/usuario/registrar', (req, res) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
+                status:400,
                 msg: 'Error al registrar el usuario.',
                 err
             });
         }
         return res.status(200).json({
             ok: true,
+            status:200,
+            msg:'Se registro correctamente el usuario',
             usrDB
         });
     });
 });
 
-app.put('/usuario/:id', (req, res) => {
+app.put('/api/usuario/actualizar/:id', (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'estado', 'SegApellido', 'priApellido']); //FILTRAR del body, on el pick seleccionar los campos que interesan del body 
     //id 'su coleccion, new -> si no existe lo inserta, runVali-> sirve para validar todas las condiciones del modelo 
@@ -91,18 +99,22 @@ app.put('/usuario/:id', (req, res) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
+                status:400,
+                msg:'Error al actualizar el usuario',
                 err
             });
         }
         return res.status(200).json({
             ok: true,
+            status:200,
+            msg:'Se actualizo el usuario correctamente',
             usrDB
         });
 
     });
 });
 
-app.delete('/usuario/:id', (req, res) => {
+app.delete('/api/usuario/eliminar/:id', (req, res) => {
     let id = req.params.id;
     //     Usuario.deleteOne({ _id: id }, (err, resp) => {
     //         if (err) {
@@ -133,11 +145,15 @@ app.delete('/usuario/:id', (req, res) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
+                status:400,
+                msg:'Error al eliminar el usuario',
                 err
             });
         }
         return res.status(200).json({
             ok: true,
+            status:200,
+            msg:'se elimino correctamente el usuario',
             resp
         });
     });

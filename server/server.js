@@ -1,3 +1,4 @@
+/* jshint esversion: 8 */
 require('./config/config');
 const express = require('express');
 const mongoose = require('mongoose');
@@ -18,7 +19,7 @@ app.use((req, res, next) => {
 });
 
 //parse application/x-www-from-urlencoded
-app.use(bodyParser.urlencoded({ extend: false }));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //parse formato a application/json
 app.use(bodyParser.json());
@@ -37,3 +38,4 @@ mongoose.connect(process.env.URLDB, {
     });
 //puerto que escucha 
 app.listen(process.env.PORT);
+console.log('escuchando por'+ process.env.PORT);

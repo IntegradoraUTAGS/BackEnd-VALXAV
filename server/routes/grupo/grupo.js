@@ -1,9 +1,10 @@
+/* jshint esversion: 8 */
 const express = require('express');
 const _ = require('underscore');
 const Grupo = require('../models/grupo'); //subir nivel
 const app = express();
 
-app.post('/grupo/registrar', (req, res) => {
+app.post('/api/grupo/registrar', (req, res) => {
     let body = req.body;
     let grupo = new Grupo({
    
@@ -18,12 +19,15 @@ app.post('/grupo/registrar', (req, res) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
+                status:400,
                 msg: 'Error al registrar el nombre del grupo.',
                 err
             });
         }
         return res.status(200).json({
             ok: true,
+            status:200,
+            msg: 'Se registro el nombre del grupo correctamente.',
             usrDB
         });
     });
@@ -31,18 +35,22 @@ app.post('/grupo/registrar', (req, res) => {
 
 
 //get
-app.get('/grupo', (req, res) => {
+app.get('/api/grupo/obtener', (req, res) => {
     Grupo.find({ estado: true }).populate('carrera').populate('especialidad').populate('periodo')
         .exec((err, grupos) => { //ejecuta la funcion
             if (err) {
                 return res.status(400).json({
                     ok: false,
+                    status:400,
+                    msg: 'Error al obtener el nombre del grupo.',
                     err
                 });
             }
           
             return res.status(200).json({
                 ok: true,
+                status:200,
+                msg: 'Se obtuvieron los grupos.',
                 count: grupos.length,
                 grupos
             });
@@ -50,19 +58,23 @@ app.get('/grupo', (req, res) => {
 });
 
 //get id
-app.get('/grupo/:id', (req, res) => {
+app.get('/api/grupo/obtener/:id', (req, res) => {
     let id = req.params.id;
     Grupos.find({ estado: true, _id: id })
         .exec((err, grupos) => { //ejecuta la funcion
             if (err) {
                 return res.status(400).json({
                     ok: false,
+                    status:400,
+                    msg: 'Error al obtener el nombre del grupo.',
                     err
                 });
             }
         
             return res.status(200).json({
                 ok: true,
+                status:200,
+                msg: 'Se obtuvo el grupo correctamente.',
                 count: grupos.length,
                 grupos
             });
@@ -70,18 +82,22 @@ app.get('/grupo/:id', (req, res) => {
 });
 
 //put
-app.put('/grupo/:id', (req, res) => {
+app.put('/api/grupo/actualizar/:id', (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre','carrera','especialidad','periodo']); 
     Grupo.findByIdAndUpdate(id, body, { new: true, runValidators: true, context: 'query' }, (err, usrDB) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
+                status:400,
+                msg: 'Error al actualizar el nombre del grupo.',
                 err
             });
         }
         return res.status(200).json({
             ok: true,
+            status:200,
+            msg: 'Se al actualizo el grupo correctamente.',
             usrDB
         });
 
@@ -89,18 +105,22 @@ app.put('/grupo/:id', (req, res) => {
 });
 
 //delete
-app.delete('/grupo/:id', (req, res) => {
+app.delete('/api/grupo/eliminar/:id', (req, res) => {
     let id = req.params.id;
     Grupos.findByIdAndUpdate(id, { estado: false }, { new: true, runValidators: true, context: 'query' }, (err, resp) => {
         if (err) {
             return res.status(400).json({
                 ok: false,
-                err
+                status:400,
+                msg: 'Error al eliminar el grupo.',
+                cont:err
             });
         }
         return res.status(200).json({
             ok: true,
-            resp
+            status:200,
+            msg: 'Se eliminar el grupo correctamente.',
+            cont:resp
         });
     });
 });
