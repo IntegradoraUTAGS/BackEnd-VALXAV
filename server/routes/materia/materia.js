@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 const express = require('express');
 const _ = require('underscore');
-const Materia = require('../models/materia');
+const Materia = require('../../models/materia');
 const app = express();
 
 app.get('/api/materia/obtener', (req, res) => {

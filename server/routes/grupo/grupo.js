@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 const express = require('express');
 const _ = require('underscore');
-const Grupo = require('../models/grupo'); //subir nivel
+const Grupo = require('../../models/grupo'); //subir nivel
 const app = express();
 
 app.post('/api/grupo/registrar', (req, res) => {

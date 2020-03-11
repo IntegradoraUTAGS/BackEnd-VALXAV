@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 const express = require('express');
 const _ = require('underscore');
-const Especialidad = require('../models/especialidad'); //subir nivel
+const Especialidad = require('../../models/especialidad'); //subir nivel
 const app = express();
 
 app.post('/api/especialidad/registrar', (req, res) => {

@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 const express = require('express');
 const _ = require('underscore');
-const Carrera = require('../models/carrera'); //subir nivel
+const Carrera = require('../../models/carrera'); //subir nivel
 const app = express();
 
 app.post('/api/carrera/registrar', (req, res) => {

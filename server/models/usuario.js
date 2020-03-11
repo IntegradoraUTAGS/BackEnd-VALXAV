@@ -34,7 +34,7 @@ let usuarioSchema = new Schema({
     }
 });
 
-grupoSchema.plugin(mongooseHidden,({ hidden: { password: true } }))
+usuarioSchema.plugin(mongooseHidden,({ hidden: { password: true } }))
 //el esquema utilize el plugin
 usuarioSchema.plugin(uniqueValidator, {
     message: '{PATH} Debe ser único y diferente'

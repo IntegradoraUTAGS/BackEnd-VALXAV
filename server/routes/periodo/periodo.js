@@ -1,7 +1,7 @@
  /* jshint esversion: 8 */ 
 const express = require('express');
 const _ = require('underscore');
-const Periodo = require('../models/periodo'); //subir nivel
+const Periodo = require('../../models/periodo'); //subir nivel
 const app = express();
 
 app.post('/api/periodo/registrar', (req, res) => {

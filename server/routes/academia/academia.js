@@ -1,7 +1,7 @@
 /* jshint esversion: 8 */
 const express = require('express');
 const _ = require('underscore');
-const Academia = require('../models/academia');
+const Academia = require('../../models/academia');
 const app = express();
 
 app.get('/api/academia/obtener', (req, res) => {
