@@ -4,7 +4,7 @@ const _ = require('underscore');
 const Carrera = require('../../models/carrera'); //subir nivel
 const app = express();
 
-app.post('/api/carrera/registrar', (req, res) => {
+app.post('/registrar', (req, res) => {
     let body = req.body;
     let carrera = new Carrera({
         //para poder mandar los datos a la coleccion
@@ -30,7 +30,7 @@ app.post('/api/carrera/registrar', (req, res) => {
 
 
 //get
-app.get('/api/carrera/obtener', (req, res) => {
+app.get('/obtener', (req, res) => {
     Carrera.find({ estado: true, }) 
         .exec((err, carreras) => { //ejecuta la funcion
             if (err) {
@@ -53,7 +53,7 @@ app.get('/api/carrera/obtener', (req, res) => {
 });
 
 //get id
-app.get('/api/carrera/obtener/:id', (req, res) => {
+app.get('/obtener/:id', (req, res) => {
     let id = req.params.id;
     Carrera.find({ estado: true, _id: id }) 
         .exec((err, carreras) => { //ejecuta la funcion
@@ -77,7 +77,7 @@ app.get('/api/carrera/obtener/:id', (req, res) => {
 });
 
 //put
-app.put('/api/carrera/actualizar/:id', (req, res) => {
+app.put('/actualizar/:id', (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre']); 
     Carrera.findByIdAndUpdate(id, body, { new: true, runValidators: true, context: 'query' }, (err, usrDB) => {
@@ -100,7 +100,7 @@ app.put('/api/carrera/actualizar/:id', (req, res) => {
 });
 
 //delete
-app.delete('/api/carrera/eliminar/:id', (req, res) => {
+app.delete('/eliminar/:id', (req, res) => {
     let id = req.params.id;
     Carrera.findByIdAndUpdate(id, { estado: false }, { new: true, runValidators: true, context: 'query' }, (err, resp) => {
         if (err) {

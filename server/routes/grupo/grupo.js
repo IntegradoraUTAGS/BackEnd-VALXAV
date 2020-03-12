@@ -4,7 +4,7 @@ const _ = require('underscore');
 const Grupo = require('../../models/grupo'); //subir nivel
 const app = express();
 
-app.post('/api/grupo/registrar', (req, res) => {
+app.post('/registrar', (req, res) => {
     let body = req.body;
     let grupo = new Grupo({
    
@@ -35,7 +35,7 @@ app.post('/api/grupo/registrar', (req, res) => {
 
 
 //get
-app.get('/api/grupo/obtener', (req, res) => {
+app.get('/obtener', (req, res) => {
     Grupo.find({ estado: true }).populate('carrera').populate('especialidad').populate('periodo')
         .exec((err, grupos) => { //ejecuta la funcion
             if (err) {
@@ -58,7 +58,7 @@ app.get('/api/grupo/obtener', (req, res) => {
 });
 
 //get id
-app.get('/api/grupo/obtener/:id', (req, res) => {
+app.get('/obtener/:id', (req, res) => {
     let id = req.params.id;
     Grupos.find({ estado: true, _id: id })
         .exec((err, grupos) => { //ejecuta la funcion
@@ -82,7 +82,7 @@ app.get('/api/grupo/obtener/:id', (req, res) => {
 });
 
 //put
-app.put('/api/grupo/actualizar/:id', (req, res) => {
+app.put('/actualizar/:id', (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre','carrera','especialidad','periodo']); 
     Grupo.findByIdAndUpdate(id, body, { new: true, runValidators: true, context: 'query' }, (err, usrDB) => {
@@ -105,7 +105,7 @@ app.put('/api/grupo/actualizar/:id', (req, res) => {
 });
 
 //delete
-app.delete('/api/grupo/eliminar/:id', (req, res) => {
+app.delete('/eliminar/:id', (req, res) => {
     let id = req.params.id;
     Grupos.findByIdAndUpdate(id, { estado: false }, { new: true, runValidators: true, context: 'query' }, (err, resp) => {
         if (err) {

@@ -4,7 +4,7 @@ const _ = require('underscore');
 const Periodo = require('../../models/periodo'); //subir nivel
 const app = express();
 
-app.post('/api/periodo/registrar', (req, res) => {
+app.post('/registrar', (req, res) => {
     let body = req.body;
     let periodo = new Periodo({
         //para poder mandar los datos a la coleccion
@@ -33,7 +33,7 @@ app.post('/api/periodo/registrar', (req, res) => {
 });
 
 //get
-app.get('/api/periodo/obtener', (req, res) => {
+app.get('/obtener', (req, res) => {
     Periodo.find({ estado: true, }) 
         .exec((err, periodos) => { //ejecuta la funcion
             if (err) {
@@ -56,7 +56,7 @@ app.get('/api/periodo/obtener', (req, res) => {
 });
 
 //get id
-app.get('/api/periodo/obtener/:id', (req, res) => {
+app.get('/obtener/:id', (req, res) => {
     let id = req.params.id;
     Periodo.find({ estado: true, _id: id }) 
         .exec((err, periodos) => { //ejecuta la funcion
@@ -80,7 +80,7 @@ app.get('/api/periodo/obtener/:id', (req, res) => {
 });
 
 //put
-app.put('/api/periodo/actualizar/:id', (req, res) => {
+app.put('/actualizar/:id', (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'fechaInicio', 'fechaFin']); 
     Periodo.findByIdAndUpdate(id, body, { new: true, runValidators: true, context: 'query' }, (err, usrDB) => {
@@ -103,7 +103,7 @@ app.put('/api/periodo/actualizar/:id', (req, res) => {
 });
 
 //delete
-app.delete('/api/periodo/eliminar/:id', (req, res) => {
+app.delete('/eliminar/:id', (req, res) => {
     let id = req.params.id;
     Periodo.findByIdAndUpdate(id, { estado: false }, { new: true, runValidators: true, context: 'query' }, (err, resp) => {
         if (err) {

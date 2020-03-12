@@ -4,7 +4,7 @@ const _ = require('underscore');
 const Especialidad = require('../../models/especialidad'); //subir nivel
 const app = express();
 
-app.post('/api/especialidad/registrar', (req, res) => {
+app.post('/registrar', (req, res) => {
     let body = req.body;
     let especialidad = new Especialidad({
    
@@ -32,7 +32,7 @@ app.post('/api/especialidad/registrar', (req, res) => {
 
 
 //get
-app.get('/api/especialidad/obtener', (req, res) => {
+app.get('/obtener', (req, res) => {
     Especialidad.find({ estado: true }).populate('carrera')
         .exec((err, especialidads) => { //ejecuta la funcion
             if (err) {
@@ -55,7 +55,7 @@ app.get('/api/especialidad/obtener', (req, res) => {
 });
 
 //get id
-app.get('/api/especialidad/obtener/:id', (req, res) => {
+app.get('/obtener/:id', (req, res) => {
     let id = req.params.id;
     Especialidad.find({ estado: true, _id: id })
         .exec((err, especialidads) => { //ejecuta la funcion
@@ -79,7 +79,7 @@ app.get('/api/especialidad/obtener/:id', (req, res) => {
 });
 
 //put
-app.put('/api/especialidad/actualizar/:id', (req, res) => {
+app.put('/actualizar/:id', (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre','carrera']); 
     Especialidad.findByIdAndUpdate(id, body, { new: true, runValidators: true, context: 'query' }, (err, usrDB) => {
@@ -102,7 +102,7 @@ app.put('/api/especialidad/actualizar/:id', (req, res) => {
 });
 
 //delete
-app.delete('/api/especialidad/eliminar/:id', (req, res) => {
+app.delete('/eliminar/:id', (req, res) => {
     let id = req.params.id;
     Especialidad.findByIdAndUpdate(id, { estado: false }, { new: true, runValidators: true, context: 'query' }, (err, resp) => {
         if (err) {

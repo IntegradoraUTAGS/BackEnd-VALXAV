@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //parse formato a application/json
 app.use(bodyParser.json());
 //archivo agrupador de indices
-app.use(require('./routes/index'));
+app.use('/api',require('./routes/index'));
 //conector a la db
 mongoose.connect(process.env.URLDB, {
         useNewUrlParser: true,
@@ -34,8 +34,8 @@ mongoose.connect(process.env.URLDB, {
     (err, resp) => {
         if (err) throw err;
 
-        console.log('base de datos online');
+        console.log('base de datos online <3 ');
     });
 //puerto que escucha 
 app.listen(process.env.PORT);
-console.log('escuchando por'+ process.env.PORT);
+console.log('escuchando por el puerto '+ process.env.PORT);

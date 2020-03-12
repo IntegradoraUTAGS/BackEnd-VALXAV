@@ -4,7 +4,7 @@ const _ = require('underscore');
 const Academia = require('../../models/academia');
 const app = express();
 
-app.get('/api/academia/obtener', (req, res) => {
+app.get('/obtener', (req, res) => {
     Academia.find()
         .exec((err, academia) => {
             if (err) {
@@ -26,7 +26,7 @@ app.get('/api/academia/obtener', (req, res) => {
         });
 });
 
-app.post('/api/academia/registrar', (req, res) => {
+app.post('/registrar', (req, res) => {
     let body = req.body;
 
     let academia = new Academia({
@@ -52,7 +52,7 @@ app.post('/api/academia/registrar', (req, res) => {
     });
 });
 
-app.put('/api/academia/actualizar/:id', (req, res) => {
+app.put('/actualizar/:id', (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre']);
 
@@ -74,7 +74,7 @@ app.put('/api/academia/actualizar/:id', (req, res) => {
     });
 });
 
-app.delete('/api/academia/eliminar/:id', (req, res) => {
+app.delete('/eliminar/:id', (req, res) => {
     let id = req.params.id;
 
     Academia.findByIdAndUpdate(id, {estado:false}, { new: true, runValidators: true, context: 'query' }, (err, usrDB) => {

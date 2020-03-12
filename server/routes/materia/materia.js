@@ -4,7 +4,7 @@ const _ = require('underscore');
 const Materia = require('../../models/materia');
 const app = express();
 
-app.get('/api/materia/obtener', (req, res) => {
+app.get('/obtener', (req, res) => {
     Materia.find()
         .exec((err, materia) => {
             if (err) {
@@ -26,7 +26,7 @@ app.get('/api/materia/obtener', (req, res) => {
         });
 });
 
-app.post('/api/materia/registrar', (req, res) => {
+app.post('/registrar', (req, res) => {
     let body = req.body;
 
     let materia = new Materia({
@@ -54,7 +54,7 @@ app.post('/api/materia/registrar', (req, res) => {
     });
 });
 
-app.put('/api/materia/actualizar/:id', (req, res) => {
+app.put('/actualizar/:id', (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre','numeroUnidades','academia']);
 
@@ -76,7 +76,7 @@ app.put('/api/materia/actualizar/:id', (req, res) => {
     });
 });
 
-app.delete('/api/materia/eliminar/:id', (req, res) => {
+app.delete('/eliminar/:id', (req, res) => {
     let id = req.params.id;
 
     Materia.findByIdAndUpdate(id, {estado:false}, { new: true, runValidators: true, context: 'query' }, (err, mtrDB) => {

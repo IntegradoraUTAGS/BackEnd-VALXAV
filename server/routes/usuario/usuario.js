@@ -6,7 +6,7 @@ const { verificaToken } = require('../../middlewares/autenticacion');
 const Usuario = require('../../models/usuario'); //subir nivel
 const app = express();
 
-app.get('/api/usuario/obtener', [verificaToken], (req, res) => {
+app.get('/obtener', [verificaToken], (req, res) => {
     // let desde = req.params.desde || 0;
     // desde = Number(desde); //forzar que el dato siempre sea numerico
     // let limite = req.params.limite || 0;
@@ -40,7 +40,7 @@ app.get('/api/usuario/obtener', [verificaToken], (req, res) => {
 //         nombre
 //     });
 // });
-app.get('/api/usuario/obtener/:id', [verificaToken], (req, res) => {
+app.get('/obtener/:id', [verificaToken], (req, res) => {
     let id = req.params.id;
     Usuario.find({ estado: true, _id: id }) //select * from usuario where estado=true
         .exec((err, usuarios) => { //ejecuta la funcion
@@ -62,7 +62,7 @@ app.get('/api/usuario/obtener/:id', [verificaToken], (req, res) => {
             });
         });
 });
-app.post('/api/usuario/registrar', (req, res) => {
+app.post('/registrar', (req, res) => {
     let body = req.body;
     let usuario = new Usuario({
         //para poder mandar los datos a la coleccion
@@ -91,7 +91,7 @@ app.post('/api/usuario/registrar', (req, res) => {
     });
 });
 
-app.put('/api/usuario/actualizar/:id', (req, res) => {
+app.put('/actualizar/:id', (req, res) => {
     let id = req.params.id;
     let body = _.pick(req.body, ['nombre', 'estado', 'SegApellido', 'priApellido']); //FILTRAR del body, on el pick seleccionar los campos que interesan del body 
     //id 'su coleccion, new -> si no existe lo inserta, runVali-> sirve para validar todas las condiciones del modelo 
@@ -114,7 +114,7 @@ app.put('/api/usuario/actualizar/:id', (req, res) => {
     });
 });
 
-app.delete('/api/usuario/eliminar/:id', (req, res) => {
+app.delete('/eliminar/:id', (req, res) => {
     let id = req.params.id;
     //     Usuario.deleteOne({ _id: id }, (err, resp) => {
     //         if (err) {
