@@ -68,7 +68,7 @@ app.post('/registrar', (req, res) => {
         //para poder mandar los datos a la coleccion
         nombre: body.nombre,
         email: body.email,
-        password: bcrypt.hashSync(body.password, 10), //numero de veces de encriptar
+        password: bcrypt.hashSync(body.password,10), //numero de veces de encriptar
         priApellido: body.priApellido,
         SegApellido: body.SegApellido
     });
