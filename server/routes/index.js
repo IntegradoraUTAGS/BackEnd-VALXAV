@@ -11,4 +11,5 @@ app.use('/carrera',require('./carrera/carrera'));
 app.use('/especialidad',require('./especialidad/especialidad'));
 app.use('/grupo',require('./grupo/grupo'));
 app.use('/materia',require('./materia/materia'));
+app.use('/coordinador',require('./coordinador/coordinador'))
 module.exports = app;

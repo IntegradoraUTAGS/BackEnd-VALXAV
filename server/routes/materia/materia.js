@@ -5,7 +5,7 @@ const Materia = require('../../models/materia');
 const app = express();
 
 app.get('/obtener', (req, res) => {
-    Materia.find()
+    Materia.find().populate('academia')
         .exec((err, materia) => {
             if (err) {
                 return res.status(400).json({
