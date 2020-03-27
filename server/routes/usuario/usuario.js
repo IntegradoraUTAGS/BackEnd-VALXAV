@@ -6,13 +6,13 @@ const { verificaToken } = require('../../middlewares/autenticacion');
 const Usuario = require('../../models/usuario'); //subir nivel
 const app = express();
 
-app.get('/obtener', [verificaToken], (req, res) => {
+app.get('/obtener', (req, res) => {
     // let desde = req.params.desde || 0;
     // desde = Number(desde); //forzar que el dato siempre sea numerico
     // let limite = req.params.limite || 0;
     // limite = Number(limite);
 
-    Usuario.find({ estado: true, }) //select * from usuario where estado=true
+    Usuario.find({ estado: true }) //select * from usuario where estado=true
         //solo aceptan valores numericos
         // .skip(desde)
         // .limit(limite)
@@ -26,8 +26,10 @@ app.get('/obtener', [verificaToken], (req, res) => {
             console.log(req.usuario);
             return res.status(200).json({
                 ok: true,
+                status:200,
+                msg:"Se obtuvieron los usuarios correctamente",
                 count: usuarios.length,
-                usuarios
+                 usuarios
             });
         });
 });
