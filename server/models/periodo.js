@@ -11,11 +11,11 @@ let periodoSchema = new Schema({
         required: [true, 'Por favor ingresa el nombre del periodo']
     },
     fechaInicio: {
-        type: Date,
+        type: String,
         required: [true, 'Por favor ingresa la fecha de inicio']
     },
     fechaFin: {
-        type: Date,
+        type: String,
         required: [true, 'Por favor ingresa la fecha de fin']
     },
 
