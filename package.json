@@ -23,7 +23,7 @@
     "multiparty": "^4.2.1",
     "nodemailer": "^6.4.2",
     "socket.io": "^2.3.0",
-    "underscore": "^1.9.1",
+    "underscore": "^1.12.1",
     "uniqid": "^5.1.0"
   },
   "devDependencies": {},
