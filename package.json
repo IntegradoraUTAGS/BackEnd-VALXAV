@@ -21,7 +21,7 @@
     "mongoose-unique-validator": "^2.0.3",
     "multipart": "^0.1.5",
     "multiparty": "^4.2.1",
-    "nodemailer": "^6.4.2",
+    "nodemailer": "^6.4.16",
     "socket.io": "^2.3.0",
     "underscore": "^1.9.1",
     "uniqid": "^5.1.0"
